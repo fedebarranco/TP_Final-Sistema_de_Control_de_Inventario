@@ -75,6 +75,10 @@ def cargar_herramientas(inventario):
     print("Carga terminada")
 
 def mostrar_inventario(inventario):
+    """Opción 2: muestra todas las herramientas con su stock.
+
+    Autor: Nicolás Tissoni.
+    """
     if not inventario:
         print("No hay herramientas cargadas en el inventario")
     else:
@@ -83,16 +87,23 @@ def mostrar_inventario(inventario):
             print(f"Nombre: {herramienta['herramienta']} | Stock: {herramienta['cantidad']}")
 
 def consultar_stock(inventario):
-    nombre_de_herramienta_consultado = input("Ingrese el nombre de la herramienta a consultar: ")
-    encontrada = False
+    """Opción 3: busca una herramienta por nombre y muestra su stock.
 
-    for herramienta in inventario:
-        if herramienta['herramienta'] == nombre_de_herramienta_consultado:
-            print(f"Stock de {herramienta['herramienta']} es {herramienta['cantidad']}")
-            encontrada = True
+    Si el nombre está vacío, validar_nombre lanza ValueError y el error
+    sale de la función hasta el except de main().
+    Autor original: Nicolás Tissoni.
+    """
+    if len(inventario) == 0:
+        print("Todavía no hay herramientas cargadas")
+        return
 
-    if not encontrada:
-        print(f"{nombre_de_herramienta_consultado} no se encontró")
+    nombre_de_herramienta_consultado = validar_nombre(input("Ingrese el nombre de la herramienta a consultar: "))
+    herramienta = buscar_herramienta(inventario, nombre_de_herramienta_consultado)
+
+    if herramienta is None:
+        print(f"{nombre_de_herramienta_consultado} no se encontró en el catálogo")
+    else:
+        print(f"Stock de {herramienta['herramienta']} es {herramienta['cantidad']}")
 
 def alta_producto(inventario):
     nombre_producto_ingresado = input("Ingresar el nombre del producto: ")
