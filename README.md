@@ -3,9 +3,19 @@
 Trabajo Práctico Integrador de **Programación 1** — Tecnicatura Universitaria en Programación a Distancia (TUPaD), UTN.
 1° Cuatrimestre 2026.
 
+## Autor
+
+- **Federico Barranco** — autor del trabajo y de la entrega (individual).
+- **Nicolás Tissoni** — colaborador inicial: escribió la primera versión de `cargar_herramientas`, `mostrar_inventario`, `consultar_stock` y `alta_producto`. Dejó la materia en octubre de 2026, y desde entonces terminé el trabajo solo: corregí esas funciones para la consigna vigente y escribí el resto.
+
+## Video y documentación
+
+- 🎥 Video explicativo: *(link pendiente)*
+- 📄 Informe en PDF: `Informe TPI - Barranco Federico.pdf`, en la raíz de este repositorio *(pendiente)*
+
 ## Descripción
 
-Una ferretería local necesita digitalizar el control de sus productos para evitar pérdidas de stock. Este programa permite gestionar las herramientas a la venta y sus unidades disponibles en tiempo real, mediante un menú interactivo:
+Una ferretería local necesita digitalizar el control de sus productos para evitar pérdidas de stock. El programa maneja las herramientas a la venta y sus unidades disponibles con un menú que se repite hasta elegir salir:
 
 1. Carga de herramientas con existencias iniciales
 2. Visualización de inventario
@@ -15,141 +25,46 @@ Una ferretería local necesita digitalizar el control de sus productos para evit
 6. Actualización de stock (venta / ingreso)
 7. Salir
 
-## Tecnologías
+Los datos se guardan en una sola lista de diccionarios, `inventario`, donde cada herramienta tiene las claves `'herramienta'` y `'cantidad'`. Se crea dentro de `main()` y se pasa por parámetro a cada función (no hay variables globales). Los datos no se guardan al cerrar el programa.
 
-Python puro, sin librerías externas. Toda la información se maneja con una única lista de diccionarios (`inventario[]`), donde cada elemento tiene las claves `'herramienta'` y `'cantidad'`.
+## Archivos
+
+| Archivo | Qué tiene |
+|---|---|
+| `main.py` | `main()`: crea el inventario y repite el menú. **Es el archivo que se ejecuta.** |
+| `carga_y_consulta.py` | Opciones 1, 2, 3 y 5, y las funciones auxiliares `validar_nombre` y `buscar_herramienta`. |
+| `stock_y_menu.py` | Opciones 4 y 6, y `mostrar_menu`. |
 
 ## Cómo ejecutar
 
-*(a completar cuando el código esté integrado)*
-
-## Clonar el repositorio en local
-
-Para obtener una copia del proyecto en tu computadora y poder trabajar con él de forma local, se debe clonar el repositorio desde GitHub.
-
-### 1. Verificar que Git esté instalado
-
-Abrir una terminal y ejecutar:
+Hace falta Python 3 (lo probé con Python 3.14). No usa librerías externas.
 
 ```bash
-git --version
+python main.py
 ```
 
-Si Git está instalado correctamente, se mostrará su versión, por ejemplo:
+Ejemplo de uso:
 
 ```text
-git version 2.x.x
+===== FERRETERÍA - CONTROL DE INVENTARIO =====
+1. Cargar herramientas con stock inicial
+...
+7. Salir
+Seleccione una opción: 1
+Ingrese la cantidad de herramientas: 2
+Ingrese el nombre de la herramienta: Martillo
+Ingrese el stock de la herramienta: 10
+Ingrese el nombre de la herramienta: martillo
+Error: martillo ya existe en el inventario
+Ingrese el nombre de la herramienta: Pala
+Ingrese el stock de la herramienta: 0
+Carga terminada
 ```
 
-### 2. Elegir la ubicación del proyecto
-
-Abrir una terminal y dirigirse a la carpeta donde se desea guardar el proyecto.
-
-Por ejemplo:
+## Clonar el repositorio
 
 ```bash
-cd Documentos
-```
-
-También se puede utilizar cualquier otra ubicación de preferencia.
-
-### 3. Clonar el repositorio
-
-Ejecutar el siguiente comando:
-
-```bash
-git clone https://github.com/NicAT-12/TP_Final-Sistema_de_Control_de_Inventario.git
-```
-
-Este comando descargará el repositorio completo desde GitHub y creará una carpeta llamada:
-
-```text
-TP_Final-Sistema_de_Control_de_Inventario
-```
-
-El proceso de clonación también descarga el historial de Git y configura automáticamente el repositorio remoto como `origin`.
-
-### 4. Ingresar a la carpeta del proyecto
-
-Una vez finalizada la clonación, ejecutar:
-
-```bash
+git clone https://github.com/fedebarranco/TP_Final-Sistema_de_Control_de_Inventario.git
 cd TP_Final-Sistema_de_Control_de_Inventario
+python main.py
 ```
-
-### 5. Verificar el estado del repositorio
-
-Para comprobar que el repositorio local funciona correctamente:
-
-```bash
-git status
-```
-
-Debería aparecer información similar a:
-
-```text
-On branch main
-Your branch is up to date with 'origin/main'.
-
-nothing to commit, working tree clean
-```
-
-### 6. Verificar la conexión con GitHub
-
-Para comprobar que el repositorio local está vinculado correctamente con el repositorio remoto:
-
-```bash
-git remote -v
-```
-
-Debería mostrarse:
-
-```text
-origin  https://github.com/NicAT-12/TP_Final-Sistema_de_Control_de_Inventario.git (fetch)
-origin  https://github.com/NicAT-12/TP_Final-Sistema_de_Control_de_Inventario.git (push)
-```
-
-### 7. Obtener cambios posteriores
-
-Si en el futuro se realizan cambios en GitHub y se desea actualizar la copia local, primero ingresar a la carpeta del proyecto:
-
-```bash
-cd TP_Final-Sistema_de_Control_de_Inventario
-```
-
-Luego ejecutar:
-
-```bash
-git pull
-```
-
-Esto descarga los cambios del repositorio remoto y los integra en la rama local.
-
-### Resumen
-
-Los comandos principales para clonar el proyecto son:
-
-```bash
-cd Documentos
-
-git clone https://github.com/NicAT-12/TP_Final-Sistema_de_Control_de_Inventario.git
-
-cd TP_Final-Sistema_de_Control_de_Inventario
-
-git status
-```
-
-A partir de ese momento, el proyecto estará disponible localmente y listo para trabajar con Git.
-
-## Autores
-
-- Federico Barranco
-- Nicolás Tissoni
-
-## Estado
-
-🚧 En desarrollo.
-
-## Nota sobre la entrega
-
-La entrega formal del TPI se realiza mediante un archivo `.zip` subido a la plataforma institucional (código + informe PDF). Este repositorio es la herramienta de trabajo del equipo durante el desarrollo.
