@@ -28,12 +28,18 @@ def buscar_herramienta(inventario, nombre):
 
 
 def cargar_herramientas(inventario):
+    """Opción 1: carga varias herramientas con su stock inicial.
+
+    Pide cuántas se van a cargar y, por cada una, el nombre y el stock.
+    Los errores se atrapan acá adentro para volver a pedir el dato.
+    Autor original: Nicolás Tissoni.
+    """
     while True:
         try:
             cantidad_de_herramientas_ingresadas = int(input("Ingrese la cantidad de herramientas: "))
-            
-            if cantidad_de_herramientas_ingresadas < 0:
-                raise ValueError("La cantidad no puede ser negativa")
+
+            if cantidad_de_herramientas_ingresadas <= 0:
+                raise ValueError("La cantidad tiene que ser mayor que 0")
 
             break
         except ValueError as only_num:
@@ -42,14 +48,10 @@ def cargar_herramientas(inventario):
     for _ in range(cantidad_de_herramientas_ingresadas):
         while True:
             try:
-                nombre_herramienta_ingresada = input("Ingrese el nombre de la herramienta: ")
+                nombre_herramienta_ingresada = validar_nombre(input("Ingrese el nombre de la herramienta: "))
 
-                if not nombre_herramienta_ingresada.strip():
-                    raise ValueError("Ingrese un nombre válido")
-
-                for herramienta in inventario:
-                    if herramienta['herramienta'] == nombre_herramienta_ingresada:
-                        raise ValueError(f"{herramienta['herramienta']} ya existe en el inventario")
+                if buscar_herramienta(inventario, nombre_herramienta_ingresada) is not None:
+                    raise ValueError(f"{nombre_herramienta_ingresada} ya existe en el inventario")
 
                 break
             except ValueError as error:
@@ -66,7 +68,11 @@ def cargar_herramientas(inventario):
             except ValueError as error:
                 print(f"Error: {error}")
 
-    inventario.append({'herramienta': nombre_herramienta_ingresada, 'cantidad': stock_herramienta_ingresada})
+        # el append va ADENTRO del for: así se agrega cada herramienta apenas
+        # tiene nombre y stock válidos (antes estaba afuera y solo quedaba la última)
+        inventario.append({'herramienta': nombre_herramienta_ingresada, 'cantidad': stock_herramienta_ingresada})
+
+    print("Carga terminada")
 
 def mostrar_inventario(inventario):
     if not inventario:
