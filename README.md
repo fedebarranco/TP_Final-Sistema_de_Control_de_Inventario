@@ -11,7 +11,7 @@ Trabajo Práctico Integrador de **Programación 1** — Tecnicatura Universitari
 ## Video y documentación
 
 - 🎥 Video explicativo: *(link pendiente)*
-- 📄 Informe en PDF: `Informe TPI - Barranco Federico.pdf`, en la raíz de este repositorio *(pendiente)*
+- 📄 Informe en PDF: `Informe TPI - Barranco Federico.pdf`, en la raíz de este repositorio
 
 ## Descripción
 
