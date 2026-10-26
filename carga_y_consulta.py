@@ -106,23 +106,25 @@ def consultar_stock(inventario):
         print(f"Stock de {herramienta['herramienta']} es {herramienta['cantidad']}")
 
 def alta_producto(inventario):
-    nombre_producto_ingresado = input("Ingresar el nombre del producto: ")
+    """Opción 5: agrega una herramienta nueva al final del inventario.
+
+    Primero valida el nombre y recién después pide el stock. Acá los errores
+    NO se atrapan para reintentar: salen con raise hasta main(), que muestra
+    el motivo y vuelve al menú sin agregar nada.
+    Autor original: Nicolás Tissoni.
+    """
+    nombre_producto_ingresado = validar_nombre(input("Ingresar el nombre del producto: "))
+
+    if buscar_herramienta(inventario, nombre_producto_ingresado) is not None:
+        raise ValueError("Error el producto ya existe")
 
     try:
         stock_producto_ingresado = int(input("Ingresar el stock del producto: "))
     except ValueError:
         raise ValueError("Error, ingrese un numero valido.")
 
-    duplicado = False
-    for herramienta in inventario:
-        if herramienta['herramienta'] == nombre_producto_ingresado:
-            duplicado = True
-
-    if not nombre_producto_ingresado:
-        raise ValueError("Error ingrese un nombre valido")
-    elif duplicado:
-        raise ValueError("Error el producto ya existe")
-    elif stock_producto_ingresado < 0:
+    if stock_producto_ingresado < 0:
         raise ValueError("Error el stock no puede ser negativo")
-    else:
-        inventario.append({'herramienta': nombre_producto_ingresado, 'cantidad': stock_producto_ingresado})
+
+    inventario.append({'herramienta': nombre_producto_ingresado, 'cantidad': stock_producto_ingresado})
+    print(f"{nombre_producto_ingresado} se agregó con stock {stock_producto_ingresado}")
