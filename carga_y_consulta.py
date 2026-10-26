@@ -36,7 +36,10 @@ def cargar_herramientas(inventario):
     """
     while True:
         try:
-            cantidad_de_herramientas_ingresadas = int(input("Ingrese la cantidad de herramientas: "))
+            try:
+                cantidad_de_herramientas_ingresadas = int(input("Ingrese la cantidad de herramientas: "))
+            except ValueError:
+                raise ValueError("La cantidad tiene que ser un número entero")
 
             if cantidad_de_herramientas_ingresadas <= 0:
                 raise ValueError("La cantidad tiene que ser mayor que 0")
@@ -59,7 +62,10 @@ def cargar_herramientas(inventario):
 
         while True:
             try:
-                stock_herramienta_ingresada = int(input("Ingrese el stock de la herramienta: "))
+                try:
+                    stock_herramienta_ingresada = int(input("Ingrese el stock de la herramienta: "))
+                except ValueError:
+                    raise ValueError("El stock tiene que ser un número entero")
 
                 if stock_herramienta_ingresada < 0:
                     raise ValueError("El stock no puede ser negativo")
@@ -116,15 +122,15 @@ def alta_producto(inventario):
     nombre_producto_ingresado = validar_nombre(input("Ingresar el nombre del producto: "))
 
     if buscar_herramienta(inventario, nombre_producto_ingresado) is not None:
-        raise ValueError("Error el producto ya existe")
+        raise ValueError(f"{nombre_producto_ingresado} ya existe en el inventario")
 
     try:
         stock_producto_ingresado = int(input("Ingresar el stock del producto: "))
     except ValueError:
-        raise ValueError("Error, ingrese un numero valido.")
+        raise ValueError("El stock tiene que ser un número entero")
 
     if stock_producto_ingresado < 0:
-        raise ValueError("Error el stock no puede ser negativo")
+        raise ValueError("El stock no puede ser negativo")
 
     inventario.append({'herramienta': nombre_producto_ingresado, 'cantidad': stock_producto_ingresado})
     print(f"{nombre_producto_ingresado} se agregó con stock {stock_producto_ingresado}")

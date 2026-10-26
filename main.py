@@ -18,7 +18,10 @@ def main():
     while opcion != 7:
         mostrar_menu()
         try:
-            opcion = int(input("Seleccione una opción: "))
+            try:
+                opcion = int(input("Seleccione una opción: "))
+            except ValueError:
+                raise ValueError("La opción tiene que ser un número del 1 al 7")
 
             if opcion == 1:
                 cargar_herramientas(inventario)
