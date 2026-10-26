@@ -1,3 +1,32 @@
+# Funciones de carga y consulta del inventario.
+# Las 4 funciones de las opciones (cargar, mostrar, consultar y alta) las escribió
+# Nicolás Tissoni; yo (Federico Barranco) las corregí para la consigna nueva
+# y agregué las dos funciones auxiliares de acá abajo.
+
+
+def validar_nombre(nombre):
+    """Le saca los espacios del principio y del final al nombre.
+
+    Si queda vacío lanza ValueError. Si no, devuelve el nombre limpio.
+    """
+    nombre = nombre.strip()
+    if nombre == "":
+        raise ValueError("El nombre no puede estar vacío")
+    return nombre
+
+
+def buscar_herramienta(inventario, nombre):
+    """Busca una herramienta por nombre sin importar mayúsculas.
+
+    Devuelve el diccionario de esa herramienta (el mismo que está en la lista)
+    o None si no está en el inventario.
+    """
+    for herramienta in inventario:
+        if herramienta['herramienta'].lower() == nombre.lower():
+            return herramienta
+    return None
+
+
 def cargar_herramientas(inventario):
     while True:
         try:
